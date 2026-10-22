@@ -125,15 +125,16 @@ export const useApp = create<AppStore>()((set, get) => ({
   startError: null,
 
   hydrate: (b) =>
-    set({
+    set((s) => ({
       ready: true,
       version: b.version,
       platform: b.platform,
       settings: b.settings,
       tools: b.tools,
       history: b.history,
-      files: b.files,
-    }),
+      // Files announced by an event while bootstrap was in flight are kept.
+      files: [...b.files, ...s.files.filter((f) => !b.files.some((known) => known.id === f.id))],
+    })),
 
   addFiles: (files, truncated) =>
     set((s) => ({

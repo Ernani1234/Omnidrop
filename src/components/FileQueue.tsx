@@ -21,6 +21,8 @@ export function FileQueue() {
   const clearFiles = useApp((s) => s.clearFiles);
   const announce = useApp((s) => s.announce);
   const job = useApp((s) => s.job);
+  const inspecting = useApp((s) => s.inspecting);
+  const truncated = useApp((s) => s.truncated);
   const running = job?.status === "running" || job?.status === "cancelling";
   const totalSize = useMemo(() => files.reduce((sum, f) => sum + f.size, 0), [files]);
   const allSelected = selection.length > 0 && selection.length === files.length;
@@ -56,7 +58,19 @@ export function FileQueue() {
           </h2>
           <p className="tabular text-xs text-muted">
             {t(plural("queue.summary", files.length), { count: files.length, size: formatBytes(totalSize, t.locale) })}
+            {inspecting.active && (
+              <span role="status" className="ml-2 inline-flex items-center gap-1 text-accent-ink">
+                <Loader2 className="size-3 animate-spin" aria-hidden />
+                {inspecting.count === 1 ? t("drop.inspectingOne") : t("drop.inspecting", { count: inspecting.count })}
+              </span>
+            )}
           </p>
+          {truncated && (
+            <p className="mt-0.5 flex items-center gap-1 text-xs font-medium text-warning" role="status">
+              <AlertTriangle className="size-3.5 shrink-0" aria-hidden />
+              {t("drop.truncated")}
+            </p>
+          )}
         </div>
         {selection.length > 0 ? (
           <Button size="sm" variant="danger" icon={<Trash2 className="size-4" aria-hidden />} onClick={removeSelected} disabled={running}>
