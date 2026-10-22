@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "The main window only needs core events and window APIs. Files, dialogs and opening results go through OmniDrop's own commands.",
+  "windows": ["main"],
+  "permissions": ["core:default", "core:window:allow-set-theme"]
+}

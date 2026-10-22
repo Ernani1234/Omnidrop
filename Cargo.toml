@@ -1,0 +1,10 @@
+[workspace]
+resolver = "3"
+members = ["crates/omnidrop-engine", "crates/omnidrop-app", "src-tauri"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/Ernani1234/Omnidrop"
+authors = ["Ernani"]

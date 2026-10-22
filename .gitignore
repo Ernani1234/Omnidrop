@@ -1,0 +1,17 @@
+# Dependencies and build output
+node_modules/
+dist/
+target/
+src-tauri/gen/
+
+# Editors and OS files
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local environment
+.env
+*.local

@@ -1,0 +1,188 @@
+@import "@fontsource-variable/manrope";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Design tokens. Every colour in the UI comes from here so light and dark
+ * themes stay consistent. Text/background pairs meet WCAG AA (4.5:1).
+ */
+:root {
+  --bg: #f6f4f0;
+  --surface: #ffffff;
+  --surface-2: #f0ede8;
+  --surface-3: #e8e4dd;
+  --border: #e2ddd5;
+  --border-strong: #cbc4b8;
+  --text: #1c1a17;
+  --text-muted: #615b52;
+  --text-subtle: #6e675c;
+  --accent: #5b4cf0;
+  --accent-hover: #4a3be0;
+  --accent-text: #ffffff;
+  --accent-soft: #ecebff;
+  --accent-soft-text: #3f31c9;
+  --success: #17794f;
+  --success-soft: #e3f4ec;
+  --warning: #8a5300;
+  --warning-soft: #fdf0d9;
+  --danger: #b42e2e;
+  --danger-soft: #fbe7e5;
+  --focus: #5b4cf0;
+  --overlay: rgb(28 26 23 / 0.45);
+  --shadow: 0 1px 2px rgb(28 26 23 / 0.06), 0 8px 24px -12px rgb(28 26 23 / 0.18);
+  --fam-image: #5b4cf0;
+  --fam-pdf: #c2362f;
+  --fam-audio: #b45f06;
+  --fam-video: #0b7a75;
+  --fam-archive: #7a5a2b;
+  --fam-document: #2463b5;
+  --fam-unknown: #6b665e;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #121214;
+  --surface: #1b1b1f;
+  --surface-2: #232329;
+  --surface-3: #2c2c33;
+  --border: #2f2f37;
+  --border-strong: #45454f;
+  --text: #f2f1ee;
+  --text-muted: #b3afa8;
+  --text-subtle: #918c85;
+  --accent: #8f84ff;
+  --accent-hover: #a39aff;
+  --accent-text: #120f2e;
+  --accent-soft: rgb(143 132 255 / 0.16);
+  --accent-soft-text: #c4beff;
+  --success: #5fd3a0;
+  --success-soft: rgb(95 211 160 / 0.14);
+  --warning: #f2b552;
+  --warning-soft: rgb(242 181 82 / 0.14);
+  --danger: #ff8c82;
+  --danger-soft: rgb(255 140 130 / 0.14);
+  --focus: #a39aff;
+  --overlay: rgb(0 0 0 / 0.6);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  --fam-image: #a39aff;
+  --fam-pdf: #ff8a80;
+  --fam-audio: #f5b25a;
+  --fam-video: #4fd1c5;
+  --fam-archive: #d4b483;
+  --fam-document: #7fb2ff;
+  --fam-unknown: #a8a29a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-soft-text);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-overlay: var(--overlay);
+  --shadow-card: var(--shadow);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Native-feeling scrollbars that respect the theme. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The drop target "breathes" while files hover over the window. */
+@keyframes drop-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+}
+
+@keyframes progress-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 24px 0;
+  }
+}
+
+.progress-indeterminate {
+  background-image: linear-gradient(
+    -45deg,
+    rgb(255 255 255 / 0.25) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgb(255 255 255 / 0.25) 50%,
+    rgb(255 255 255 / 0.25) 75%,
+    transparent 75%
+  );
+  background-size: 24px 24px;
+  animation: progress-stripes 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

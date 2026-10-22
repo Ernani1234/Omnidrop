@@ -1,0 +1,41 @@
+name: Bug report
+description: Something did not work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Drop a PNG file
+        2. Choose WebP, Balanced
+        3. Press Convert
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: OmniDrop version
+      description: Settings → About
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Windows, macOS, Linux]
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Technical details
+      description: Paste the "Technical details" of the error, if shown. Check that it contains nothing private.
+      render: text

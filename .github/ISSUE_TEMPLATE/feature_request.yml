@@ -1,0 +1,22 @@
+name: Feature request
+description: Suggest a format, operation or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the task, not only the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Formats, options or behaviour you would like. For new formats, mention a library or tool you know works well.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: This works without sending files to the internet.

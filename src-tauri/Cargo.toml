@@ -1,0 +1,37 @@
+[package]
+name = "omnidrop"
+description = "OmniDrop — local file conversion with a simple drag-and-drop interface"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+default-run = "omnidrop"
+
+[lib]
+name = "omnidrop_lib"
+crate-type = ["rlib"]
+# Test binaries that link the webview runtime cannot start on Windows without
+# an application manifest; all testable logic lives in crates/omnidrop-app.
+test = false
+doctest = false
+
+[[bin]]
+name = "omnidrop"
+path = "src/main.rs"
+test = false
+
+[build-dependencies]
+tauri-build = { version = "2.7", features = [] }
+
+[dependencies]
+omnidrop-engine = { path = "../crates/omnidrop-engine" }
+omnidrop-app = { path = "../crates/omnidrop-app" }
+tauri = { version = "2.12", features = [] }
+tauri-plugin-dialog = "2.8"
+tauri-plugin-opener = "2.7"
+tauri-plugin-log = "2.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+log = "0.4"
+uuid = { version = "1", features = ["v4"] }
